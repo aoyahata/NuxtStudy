@@ -12,30 +12,29 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue'
 import { mapMutations } from 'vuex'
 
-export default {
+export default Vue.extend({
   computed: {
-    list() {
-      const list = []
-      for (let task of this.$store.state.tasks.list) {
-        if (!task.isSubmited) list.push(task)
-      }
-      return list
-    },
-    addText(text) {
-      return this.$store.getters['tasks/addText'](text)
+    list(): any[] {
+      // const list = []
+      // for (let task of this.$store.state.tasks.list) {
+      //   if (!task.isSubmited) list.push(task)
+      // }
+      // return list
+      return this.$store.getters['tasks/getUnSubmited']
     }
   },
   methods: {
-    addTask(e) {
+    addTask(e:any) {
       this.$store.commit('tasks/add', e.target.value)
     },
     ...mapMutations({
-      submit: 'tasks/submit'
+      submit: 'tasks/reverseStatus'
     })
   }
-}
+})
 </script>
 
 <style>

@@ -11,23 +11,25 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue'
 import { mapMutations } from 'vuex'
-export default {
+export default Vue.extend({
   computed: {
-    list() {
-      const list = []
-      for (let task of this.$store.state.tasks.list) {
-        if (task.isSubmited) list.push(task)
-      }
-      return list
+    list(): any[] {
+      // const list = []
+      // for (let task of this.$store.state.tasks.list) {
+      //   if (task.isSubmited) list.push(task)
+      // }
+      // return list
+      return this.$store.getters['tasks/getSubmited']
     }
   },
   methods: {
     ...mapMutations({
-      unSubmit: 'tasks/unSubmit'
+      unSubmit: 'tasks/reverseStatus'
     })
   }
-}
+})
 </script>
 
 <style>
