@@ -7,8 +7,7 @@ export default Vue.extend({
   },
   methods: {
     amountUpdate: async function() {
-      this.Amount = await axios.get(`https://query1.finance.yahoo.com/v7/finance/chart/7203.T?range=1h&interval=1h`, {
-        headers: { "Access-Control-Allow-Origin": "*"},
+      this.Amount = await axios.get(`/api/v7/finance/chart/7203.T?range=1h&interval=1h`, {
         data: {}
       })
         .then((res) => res.data['chart']['result'][0]['indicators']['quote'][0]['close'][0] )
