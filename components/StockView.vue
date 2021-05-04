@@ -1,5 +1,5 @@
 <template>
-  <div class='box'>
+  <div class='stockView'>
     <h1>StockView</h1>
     <input placeholder="銘柄番号を入力してください" :value="defaultBrand" @input="updateBrand">
     <select v-model="selected" @change="updateBar">
@@ -18,19 +18,17 @@
       <option>3mo</option>
     </select>
     <button @click="amountUpdate()">更新</button>
-    <p v-if="toggleAmount">{{ amount }}</p>
-    <p v-if="!toggleAmount">{{ Amount }}</p>
+    <p v-if="toggleAmount">{{ amount.toLocaleString() }}円</p>
+    <p v-if="!toggleAmount">{{ Amount.toLocaleString() }}円</p>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapMutations } from 'vuex'
-import { mapState } from "vuex"
 import Mixins from '../mixins/getAmount'
 
 export default Vue.extend({
-  name: "ViewTable",
+  name: "stockView",
   props: {
     amount: {
       type: Number,
@@ -51,6 +49,7 @@ export default Vue.extend({
       this.$store.commit('tasks/updateBrand', e.target.value)
     },
     updateBar() {
+      // @ts-ignore
       this.$store.commit('tasks/updateBar', this.selected)
     }
   },
@@ -64,6 +63,7 @@ export default Vue.extend({
   },
   watch: {
     Amount: function() {
+      // @ts-ignore
       this.stateAmount()
     }
   },

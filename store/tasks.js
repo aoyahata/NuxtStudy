@@ -1,4 +1,3 @@
-import axios from 'axios'
 export const state = () => ({
   list: [],
   Amount: 0,

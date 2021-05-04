@@ -1,5 +1,5 @@
 <template>
-  <div class='boxContainer'>
+  <div class='stockContainer'>
     <StockView :amount="Amount"/>
   </div>
 </template>
@@ -7,7 +7,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
-import { mapMutations } from 'vuex'
 
 export default Vue.extend({
   async asyncData () {
