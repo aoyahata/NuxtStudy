@@ -39,7 +39,16 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     "@nuxtjs/axios",
+    "@nuxtjs/proxy",
   ],
+
+  axios: {
+    proxy: true,
+    baseURL: 'https://query1.finance.yahoo.com/api/',
+  },
+  proxy: {
+    '/api/': {target: 'https://query1.finance.yahoo.com', pathRewrite: {'^/api/': '/'}}
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

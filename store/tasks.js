@@ -2,6 +2,8 @@ import axios from 'axios'
 export const state = () => ({
   list: [],
   Amount: 0,
+  bar: '1d',
+  brand: '7203',
 })
 
 export const mutations = {
@@ -19,6 +21,12 @@ export const mutations = {
   },
   getAmount(state) {
     return state.Amount
+  },
+  updateBrand(state, text) {
+    state.brand = text
+  },
+  updateBar(state, selected) {
+    state.bar = selected
   }
 }
 

@@ -3,17 +3,19 @@ import axios from 'axios'
 export default Vue.extend({
   data() {
     let Amount = 0
-    return { Amount }
+    let selected = '1d'
+    return { Amount, selected }
   },
   methods: {
     amountUpdate: async function() {
-      this.Amount = await axios.get(`https://query1.finance.yahoo.com/v7/finance/chart/7203.T?range=1h&interval=1h`, {
+      const stateTasks = this.$store.state.tasks
+      this.Amount = await axios.get(`/api/v7/finance/chart/${stateTasks.brand}.T?range=${stateTasks.bar}&interval=${stateTasks.bar}`, {
         headers: { "Access-Control-Allow-Origin": "*"},
         data: {}
       })
         .then((res) => res.data['chart']['result'][0]['indicators']['quote'][0]['close'][0] )
         .catch((error) => {
-          console.log('エラーだよ')
+          console.log('axiosエラーだよ')
           error
         })
       await console.log(this.Amount)

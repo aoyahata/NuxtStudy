@@ -1,17 +1,21 @@
 <template>
   <div class='box'>
     <h1>StockView</h1>
-    <input />
-    <select>
+    <input  placeholder="銘柄番号を入力してください" @keyup.enter="updateBrand">
+    <p>brand</p>
+    <select v-model="selected" @change="updateBar">
+      <option>1m</option>
+      <option>1h</option>
       <option>1d</option>
       <option>1mo</option>
       <option>1y</option>
     </select>
+    <p>bar</p>
     <button @click="amountUpdate()">更新</button>
-    <h>props</h>
-    <h>{{ amount }}</h>
-    <h>state</h>
-    <h>{{ stateAmount }}</h>
+    <p>props</p>
+    <p>{{ amount }}</p>
+    <p>state</p>
+    <p>{{ Amount }}</p>
   </div>
 </template>
 
@@ -22,9 +26,15 @@ import Mixins from '../mixins/getAmount'
 
 export default Vue.extend({
   name: "ViewTable",
-  computed: {
+  methods: {
     stateAmount(): Number {
       return this.$store.getters['tasks/getAmount']
+    },
+    updateBrand(e:any) {
+      this.$store.commit('tasks/updateBrand', e.target.value)
+    },
+    updateBar() {
+      this.$store.commit('tasks/updateBar', this.selected)
     }
   },
   props: {
@@ -33,6 +43,13 @@ export default Vue.extend({
       default: 0,
       required: true
     }
+  },
+  watch: {
+    Amount: function() {
+      this.stateAmount()
+    },
+    brand: function() {},
+    bar: function() {}
   },
   mixins: [Mixins]
 })
