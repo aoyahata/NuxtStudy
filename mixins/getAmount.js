@@ -18,7 +18,6 @@ export default Vue.extend({
           console.log('axiosエラーだよ')
           error
         })
-      await console.log(this.Amount)
       this.$store.commit('tasks/updateAmount', this.Amount)
     }
   }

@@ -1,31 +1,48 @@
 <template>
   <div class='box'>
     <h1>StockView</h1>
-    <input  placeholder="銘柄番号を入力してください" @keyup.enter="updateBrand">
-    <p>brand</p>
+    <input placeholder="銘柄番号を入力してください" :value="defaultBrand" @input="updateBrand">
     <select v-model="selected" @change="updateBar">
       <option>1m</option>
+      <option>2m</option>
+      <option>5m</option>
+      <option>15m</option>
+      <option>30m</option>
+      <option>60m</option>
+      <option>90m</option>
       <option>1h</option>
       <option>1d</option>
+      <option>5d</option>
+      <option>1wk</option>
       <option>1mo</option>
-      <option>1y</option>
+      <option>3mo</option>
     </select>
-    <p>bar</p>
     <button @click="amountUpdate()">更新</button>
-    <p>props</p>
-    <p>{{ amount }}</p>
-    <p>state</p>
-    <p>{{ Amount }}</p>
+    <p v-if="toggleAmount">{{ amount }}</p>
+    <p v-if="!toggleAmount">{{ Amount }}</p>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { mapMutations } from 'vuex'
+import { mapState } from "vuex"
 import Mixins from '../mixins/getAmount'
 
 export default Vue.extend({
   name: "ViewTable",
+  props: {
+    amount: {
+      type: Number,
+      default: 0,
+      required: true
+    }
+  },
+  data: function(){
+    return {
+      show: this.$store.state.tasks.Amount === 0
+    }
+  },
   methods: {
     stateAmount(): Number {
       return this.$store.getters['tasks/getAmount']
@@ -37,19 +54,18 @@ export default Vue.extend({
       this.$store.commit('tasks/updateBar', this.selected)
     }
   },
-  props: {
-    amount: {
-      type: Number,
-      default: 0,
-      required: true
+  computed: {
+    defaultBrand() {
+      return this.$store.state.tasks.brand
+    },
+    toggleAmount() {
+      return this.$store.state.tasks.Amount === 0
     }
   },
   watch: {
     Amount: function() {
       this.stateAmount()
-    },
-    brand: function() {},
-    bar: function() {}
+    }
   },
   mixins: [Mixins]
 })
