@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='box'>
     <h1>SubmitedBox</h1>
     <ul>
       <li v-for="(task, key) in list" :key="key">
