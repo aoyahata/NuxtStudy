@@ -12,8 +12,9 @@
     </select>
     <p>bar</p>
     <button @click="amountUpdate()">更新</button>
-    <p>state</p>
-    <p>{{ Amount }}</p>
+    <p>株価：{{ Amount }}</p>
+    <p>銘柄：{{ this.inputBrand }}</p>
+    <p>期間：{{ this.selected }}</p>
   </div>
 </template>
 
