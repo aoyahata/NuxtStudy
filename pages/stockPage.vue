@@ -1,6 +1,6 @@
 <template>
   <div class='boxContainer'>
-    <StockView :amount="Amount"/>
+    <StockView :Amount="Amount"/>
   </div>
 </template>
 
