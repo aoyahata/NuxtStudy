@@ -1,19 +1,16 @@
 <template>
   <div class='box'>
     <h1>StockView</h1>
-    <input  placeholder="銘柄番号を入力してください" @keyup.enter="updateBrand">
     <p>brand</p>
-    <select v-model="selected" @change="updateBar">
+    <input value="7203" placeholder="銘柄番号を入力してください" @keyup.enter="updateBrand" @blur="amountUpdate()">
+    <p>bar</p>
+    <select v-model="selected" @change="updateBar" @blur="amountUpdate()">
       <option>1m</option>
       <option>1h</option>
       <option>1d</option>
       <option>1mo</option>
       <option>1y</option>
     </select>
-    <p>bar</p>
-    <button @click="amountUpdate()">更新</button>
-    <p>props</p>
-    <p>{{ amount }}</p>
     <p>state</p>
     <p>{{ Amount }}</p>
   </div>
@@ -38,7 +35,7 @@ export default Vue.extend({
     }
   },
   props: {
-    amount: {
+    Amount: {
       type: Number,
       default: 0,
       required: true
