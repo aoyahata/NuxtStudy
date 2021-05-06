@@ -1,7 +1,7 @@
 <template>
   <div class='box'>
     <h1>StockView</h1>
-    <input  placeholder="銘柄番号を入力してください" @keyup.enter="updateBrand">
+    <input placeholder="銘柄番号を入力してください" v-model="inputBrand" @change="updateBrand">
     <p>brand</p>
     <select v-model="selected" @change="updateBar">
       <option>1m</option>
@@ -12,10 +12,9 @@
     </select>
     <p>bar</p>
     <button @click="amountUpdate()">更新</button>
-    <p>props</p>
-    <p>{{ amount }}</p>
-    <p>state</p>
-    <p>{{ Amount }}</p>
+    <p>株価：{{ Amount }}</p>
+    <p>銘柄：{{ this.inputBrand }}</p>
+    <p>期間：{{ this.selected }}</p>
   </div>
 </template>
 
@@ -30,8 +29,8 @@ export default Vue.extend({
     stateAmount(): Number {
       return this.$store.getters['tasks/getAmount']
     },
-    updateBrand(e:any) {
-      this.$store.commit('tasks/updateBrand', e.target.value)
+    updateBrand() {
+      this.$store.commit('tasks/updateBrand', this.inputBrand)
     },
     updateBar() {
       this.$store.commit('tasks/updateBar', this.selected)
