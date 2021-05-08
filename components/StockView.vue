@@ -3,23 +3,14 @@
     <h1>StockView</h1>
     <input placeholder="銘柄番号を入力してください" :value="defaultBrand" @input="updateBrand">
     <select v-model="selected" @change="updateBar">
-      <option>1m</option>
-      <option>2m</option>
-      <option>5m</option>
-      <option>15m</option>
-      <option>30m</option>
-      <option>60m</option>
-      <option>90m</option>
-      <option>1h</option>
-      <option>1d</option>
-      <option>5d</option>
-      <option>1wk</option>
-      <option>1mo</option>
-      <option>3mo</option>
+      <option v-for="(bars, key) in barsList" :key="key" :value="bars">
+        {{ bars.bar }}
+      </option>
     </select>
     <button @click="amountUpdate()">更新</button>
-    <p v-if="toggleAmount">{{ amount.toLocaleString() }}円</p>
-    <p v-if="!toggleAmount">{{ Amount.toLocaleString() }}円</p>
+    <!-- <p v-if="toggleAmount">{{ amount.toLocaleString() }}円</p>
+    <p v-if="!toggleAmount">{{ Amount.toLocaleString() }}円</p> -->
+    <p>{{ Amount.toLocaleString() }}円</p>
   </div>
 </template>
 
@@ -34,11 +25,35 @@ export default Vue.extend({
       type: Number,
       default: 0,
       required: true
+    },
+    firstBrand: {
+      type: String,
+      default: 0,
+      required: true
+    },
+    firstBar: {
+      type: String,
+      default: 0,
+      required: true
     }
   },
   data: function(){
     return {
-      show: this.$store.state.tasks.Amount === 0
+      show: this.$store.state.tasks.Amount === 0,
+      barsList: [
+        {bar: '1m'},
+        {bar: '2m'},
+        {bar: '5m'},
+        {bar: '15m'},
+        {bar: '30m'},
+        {bar: '90m'},
+        {bar: '1h'},
+        {bar: '1d'},
+        {bar: '5d'},
+        {bar: '1wk'},
+        {bar: '1mo'},
+        {bar: '3mo'},
+      ]
     }
   },
   methods: {
@@ -50,16 +65,17 @@ export default Vue.extend({
     },
     updateBar() {
       // @ts-ignore
-      this.$store.commit('tasks/updateBar', this.selected)
+      this.$store.commit('tasks/updateBar', this.selected.bar)
     }
   },
   computed: {
     defaultBrand() {
-      return this.$store.state.tasks.brand
+      return this.firstBrand
     },
     toggleAmount() {
       return this.$store.state.tasks.Amount === 0
-    }
+    },
+
   },
   watch: {
     Amount: function() {

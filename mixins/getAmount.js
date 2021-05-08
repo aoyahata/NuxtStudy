@@ -2,8 +2,8 @@ import Vue from 'vue'
 import axios from 'axios'
 export default Vue.extend({
   data() {
-    let Amount = 0
-    let selected = '1d'
+    let Amount = this.amount
+    let selected = {bar: this.firstBar}
     return { Amount, selected }
   },
   methods: {
