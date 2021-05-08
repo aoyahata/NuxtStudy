@@ -2,8 +2,9 @@ import Vue from 'vue'
 import axios from 'axios'
 export default Vue.extend({
   data() {
-    let Amount = this.amount
-    let selected = {bar: this.firstBar}
+    const stateTasks = this.$store.state.tasks
+    let Amount = stateTasks.Amount ? stateTasks.Amount : this.amount
+    let selected = {bar: stateTasks.bar ? stateTasks.bar : this.firstBar}
     return { Amount, selected }
   },
   methods: {

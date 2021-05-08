@@ -70,7 +70,8 @@ export default Vue.extend({
   },
   computed: {
     defaultBrand() {
-      return this.firstBrand
+      let stateBrand = this.$store.state.tasks.brand
+      return stateBrand ? stateBrand : this.firstBrand
     },
     toggleAmount() {
       return this.$store.state.tasks.Amount === 0
