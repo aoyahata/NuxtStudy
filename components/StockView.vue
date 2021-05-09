@@ -62,6 +62,8 @@ export default Vue.extend({
     },
     updateBrand(e:any) {
       this.$store.commit('tasks/updateBrand', e.target.value)
+      // @ts-ignore
+      this.brand = e.target.value
     },
     updateBar() {
       // @ts-ignore
