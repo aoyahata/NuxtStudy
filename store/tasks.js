@@ -1,9 +1,8 @@
-import axios from 'axios'
 export const state = () => ({
   list: [],
   Amount: 0,
-  bar: '1d',
-  brand: '7203',
+  bar: '',
+  brand: '',
 })
 
 export const mutations = {

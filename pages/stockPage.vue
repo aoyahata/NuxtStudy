@@ -1,22 +1,23 @@
 <template>
-  <div class='boxContainer'>
-    <StockView :amount="Amount"/>
+  <div class='stockContainer'>
+    <StockView :amount="Amount" :firstBrand="firstBrand" :firstBar="firstBar"/>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
-import { mapMutations } from 'vuex'
 
 export default Vue.extend({
   async asyncData () {
     let Amount = 0
+    let firstBrand = '7203'
+    let firstBar = '1mo'
     Amount = await axios
-      .get(`https://query1.finance.yahoo.com/v7/finance/chart/7203.T?range=1mo&interval=1mo`)
+      .get(`https://query1.finance.yahoo.com/v7/finance/chart/${firstBrand}.T?range=${firstBar}&interval=${firstBar}`)
       .then((res) => res.data['chart']['result'][0]['indicators']['quote'][0]['close'][0] )
       .catch((error) => error)
-    return { Amount }
+    return { Amount, firstBrand, firstBar }
   }
 })
 </script>
