@@ -20,6 +20,7 @@ export const mutations = {
     state.Amount = amount
   },
   getAmount(state) {
+    //ここはログ出力されないので使われていない？
     return state.Amount
   },
   updateBrand(state, text) {
