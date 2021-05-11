@@ -13,7 +13,6 @@ export default Vue.extend({
 </script>
 
 <style>
-@import '~/assets/style/Components/box.css';
 .boxContainer {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
