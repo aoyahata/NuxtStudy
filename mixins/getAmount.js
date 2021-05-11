@@ -29,14 +29,9 @@ export default Vue.extend({
       this.$store.commit('tasks/updateAmount', this.Amount)
     },
     checkForm() {
-      let canUpdate = false
       if (!this.inputBrand || isNaN(this.inputBrand)) {
         this.Validation.result="数値を入力してください"
       } else {
-        canUpdate = true
-      }
-
-      if (canUpdate) {
         this.Validation.result="success"
         this.amountUpdate()
       }
